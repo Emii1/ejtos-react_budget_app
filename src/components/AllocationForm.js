@@ -4,23 +4,40 @@ import { AppContext } from '../context/AppContext';
 //as the payload, and what I’ll use to update the state.
 
 const AllocationForm = (props) => {
-    const { dispatch,remaining  } = useContext(AppContext);
+    const { remaining, dispatch, currency  } = useContext(AppContext);
 
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
     const [action, setAction] = useState('');
 
     const submitEvent = () => {
-
+    const parsedValue = parseFloat(cost);
             if(cost > remaining) {
                 alert("The value cannot exceed remaining funds  £"+remaining);
                 setCost("");
                 return;
+            }else if(!Number.isNaN(parsedValue)){
+                submitEvent(parsedValue);
+
+            } else {
+                alert('Invalid input.Please enter a valid number');
             }
+            /*const handleSubmit = () => {
+    const parsedValue = parseFloat(inputValue);
+
+    if (!Number.isNaN(parsedValue)) {
+      // Only execute the submitEvent function if the input is a valid number
+      submitEvent(parsedValue);
+    } else {
+      // Display an error message or take appropriate action for invalid input
+      alert('Invalid input. Please enter a valid number.');
+    }
+  }; */ 
 
         const expense = {
             name: name,
             cost: parseInt(cost),
+            currency: currency,
         };
         if(action === "Reduce") {
             dispatch({
@@ -70,7 +87,7 @@ const AllocationForm = (props) => {
                         onChange={(event) => setCost(event.target.value)}>
                         </input>
 
-                    <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
+                    <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }} >
                         Save
                     </button>
                 </div>
