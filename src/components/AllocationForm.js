@@ -22,17 +22,7 @@ const AllocationForm = (props) => {
             } else {
                 alert('Invalid input.Please enter a valid number');
             }
-            /*const handleSubmit = () => {
-    const parsedValue = parseFloat(inputValue);
-
-    if (!Number.isNaN(parsedValue)) {
-      // Only execute the submitEvent function if the input is a valid number
-      submitEvent(parsedValue);
-    } else {
-      // Display an error message or take appropriate action for invalid input
-      alert('Invalid input. Please enter a valid number.');
-    }
-  }; */ 
+          
 
         const expense = {
             name: name,
